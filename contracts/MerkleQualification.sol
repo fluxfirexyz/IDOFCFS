@@ -6,7 +6,7 @@ import "./IQLF.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import { MerkleProof } from "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 
-contract QLF is IQLF, Ownable {
+contract MerkleQualification is IQLF, Ownable {
     bytes32 public merkleRoot;
     uint public startTime;
 

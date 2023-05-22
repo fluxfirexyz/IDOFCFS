@@ -80,7 +80,7 @@ describe(`Test Merkle Operations`, async () => {
         qualification = await QualificationFactory.deploy(ethers.constants.HashZero)
     })
 
-    for (let numAddrs = 8; numAddrs < 9; numAddrs++) {
+    for (let numAddrs = 1; numAddrs < 50; numAddrs++) {
         it(`Test ${numAddrs}`, async () => {
             
             // create n random wallets

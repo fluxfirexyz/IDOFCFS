@@ -77,7 +77,7 @@ const getMerklePath = (tree, idx) => {
 describe(`Test Merkle Operations`, async () => {
     before(async () => {
         let QualificationFactory = await ethers.getContractFactory("MerkleQualification")
-        qualification = await QualificationFactory.deploy(0, ethers.constants.HashZero)
+        qualification = await QualificationFactory.deploy(ethers.constants.HashZero)
     })
 
     for (let numAddrs = 8; numAddrs < 9; numAddrs++) {

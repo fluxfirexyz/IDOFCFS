@@ -32,23 +32,24 @@ contract MerkleQualification is IQLF, Ownable {
             string memory errorMsg
         )
     {
-        return (MerkleProof.verify(data, merkleRoot, bytes32(uint256(uint160(account)))), "");
+        return (MerkleProof.verify(data, merkleRoot, keccak256(abi.encodePacked(account))), "");
     }
 
     function logQualified(address account, bytes32[] memory data)
         public
         override
+        view
         returns (
             bool qualified,
             string memory errorMsg
         )
     {
-        return (MerkleProof.verify(data, merkleRoot, bytes32(uint256(uint160(account)))), "");
+        return (MerkleProof.verify(data, merkleRoot, keccak256(abi.encodePacked(account))), "");
     }
+
 
     function supportsInterface(bytes4 interfaceId) external override pure returns (bool) {
         return interfaceId == this.supportsInterface.selector || 
-            interfaceId == (this.ifQualified.selector ^ this.logQualified.selector) ||
-            interfaceId == this.startTime.selector;
+            interfaceId == (this.ifQualified.selector ^ this.logQualified.selector);
     }    
 }

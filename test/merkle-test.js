@@ -38,8 +38,12 @@ const buildAddrArr = async (nonZeroAddrs) => {
 const buildMerkleTree = async (addrs) => {
     let height = getTreeHeight(addrs.length)
     let tree = new Array(height + 1)
-    // leaves are H(addr)
-    tree[0] = addrs.map(addr => ethers.utils.keccak256(addr))
+
+    // leaves are H(H(addr))
+    // double hashed for security to avoid any chance of second preimage attack
+    tree[0] = addrs
+                .map(addr => ethers.utils.keccak256(addr))
+                .map(hashedAddr => ethers.utils.keccak256(hashedAddr))
 
     for (let i = 1; i < tree.length; i++) {
         tree[i] = new Array(2 ** (height - i))

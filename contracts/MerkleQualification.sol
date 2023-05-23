@@ -26,7 +26,7 @@ contract MerkleQualification is IQLF, Ownable {
             string memory errorMsg
         )
     {
-        return (MerkleProof.verify(data, merkleRoot, keccak256(abi.encodePacked(account))), "");
+        return (MerkleProof.verify(data, merkleRoot, doubleHash(account)), "");
     }
 
     function logQualified(address account, bytes32[] memory data)
@@ -38,9 +38,12 @@ contract MerkleQualification is IQLF, Ownable {
             string memory errorMsg
         )
     {
-        return (MerkleProof.verify(data, merkleRoot, keccak256(abi.encodePacked(account))), "");
+        return (MerkleProof.verify(data, merkleRoot, doubleHash(account)), "");
     }
 
+    function doubleHash(address a) internal pure returns (bytes32) {
+        return keccak256(abi.encodePacked(keccak256(abi.encodePacked(a))));
+    }
 
     function supportsInterface(bytes4 interfaceId) external override pure returns (bool) {
         return interfaceId == this.supportsInterface.selector || 

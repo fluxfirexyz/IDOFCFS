@@ -64,8 +64,9 @@ To prevent a malicious attack, you can set a `swap_start_time` in your custom qu
 
 Test ERC20s: 0xeeb24e981d195c4d9806e7bd8877e9bcaf0d6aa6, 0xeeb24e981d195c4d9806e7bd8877e9bcaf0d6aa6
 MerkleQualificationFlat: 0x95ad1dd98f0f8cda4d8fa711b1bbf6fde35e6701
-Implementation (HappyTokenPoolFlat): 
+Implementation (HappyTokenPoolFlat): 0xcaf556a3cbf1b6cccd3c9584c84fc7821c3bc19e
 Proxy (SolidityProxyFlat): 0x014643658034ad7f202bfd00d01748d784ce0cdc
+Qualification (QLFFlat): 0xe7DA9807711612074A235E7d89303282bEB58f44
 
 <!-- end address -->
 
@@ -76,14 +77,22 @@ Proxy (SolidityProxyFlat): 0x014643658034ad7f202bfd00d01748d784ce0cdc
 
 <!-- end block -->
 
-## Security Audit
+## Security
 
-The Solidity code in this repository has been audited by blockchain security experts from SlowMist. If you are interested, here are the audit reports:
+The original Solidity code in this repository has been audited by blockchain security experts from SlowMist as well as Zokyo (ito.sol, qualification.sol, and IQLF.sol). There's been some non-functional, cosmetic-only changes to allow for ease of deployment onto conflux network. Additionally, there are some other contracts have been added that are not part of the audit scope. These are the differences from the original audit:
 
-- [Audit Report](audits/SlowMist_Audit_Report_English.pdf)
-- [审计报告](audits/SlowMist_Audit_Report_Chinese.pdf)
+1. ito.sol (in original audit) - the IQLF interface has been copied into the file manually and the contract is flattened using poa-solidity-flattener. 
 
-If you have any security issue to report, please send to <security@mask.io>.
+2. qualification.sol (original contract) - the constructor has been removed and the file is flattened using poa-solidity-flattener
+
+3. MerkleQualification.sol (new contract) - A whitelist contract using merkle root logic. 
+
+4. SolidityProxy.sol (new contract) - A proxy similar in function to a min proxy, but written in solidity. This implements the absract Proxy 
+
+The pre-flattened contracts can be found in /to_flatten/ and the output from poa-solidity-flattener can be found in /contracts/out/. All deployed contracts have different contract names - we append "Flat" to the contract name to indicate that it's been modified. 
+
+Audits for the new contracts are currently ongoing.
+
 
 ## Contribute
 

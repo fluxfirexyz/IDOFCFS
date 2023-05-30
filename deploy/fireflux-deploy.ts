@@ -7,7 +7,10 @@ export async function main(): Promise<void> {
 
   /**
    * 
-   * FILL IN VARIABLES
+   * FILL IN VARIABLES 
+   * owner -> what key owns the merkle verification contract and can update merkle roots
+   * base_time -> constant offset for all start_time, end_time parameters for swap pools. can leave as 0. 
+   * priv key -> deployer priv key, set this in hardhat.config.ts
    * 
    */
   const owner = "0xc38323f809654c0aB8aD6c27Bb7F0DCa77a39a57"

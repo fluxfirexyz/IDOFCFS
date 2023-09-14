@@ -9,10 +9,6 @@ import { MerkleProof } from "@openzeppelin/contracts/utils/cryptography/MerklePr
 contract MerkleQualification is IQLF, Ownable {
     bytes32 public merkleRoot;
 
-    constructor (bytes32 _merkleRoot) {
-        merkleRoot = _merkleRoot;
-    }
-
     function setMerkleRoot(bytes32 _merkleRoot) public onlyOwner {
         merkleRoot = _merkleRoot;
     }

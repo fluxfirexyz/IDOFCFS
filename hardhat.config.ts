@@ -17,5 +17,12 @@ import "@nomiclabs/hardhat-etherscan";
 module.exports = {
     solidity: {
         version: "0.8.17"
+    },
+    networks: {
+        conflux: {
+            url: 'https://conflux-espace-public.unifra.io',
+            chainId: 1030,
+            accounts: [''] /** TODO: input priv key */
+        }
     }
 };
